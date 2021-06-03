@@ -28,11 +28,11 @@ def index():
         print(s)
         print(len(s))
         if len(s)>81:
-            return render_template('error.html')
+            return render_template('Error.html')
         sol=solver(s)
         
         if sol==False:
-            return render_template('error.html')
+            return render_template('Error.html')
         else:
             return render_template('sol.html',sol=sol)
     else:

@@ -2,7 +2,7 @@ from flask import Flask,render_template,url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sudoku_solver import solver
-app = Flask(__name__)
+app = Flask(__name__,template_folder='template')
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///test.db'
 db = SQLAlchemy(app)
 

@@ -1,0 +1,165 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<h1>Sudoku Solver</h1>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <p>
+        
+    </p>
+    
+    <form id="board" actions="/" method="POST">
+        <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg .tg-73oq{border-color:#000000;text-align:left;vertical-align:top}
+            .tg .tg-0lax{text-align:left;vertical-align:top}
+            .tg .tg-top{border-top-width:5px; border-color:#000000;}
+            .tg .tg-top-left{border-top-width:5px; border-left-width:5px; border-color:#000000;}
+            .tg .tg-top-right{border-top-width:5px; border-right-width:5px; border-color:#000000;}
+            .tg .tg-bot{border-bottom-width:5px; border-color:#000000;}
+            .tg .tg-bot-left{border-bottom-width:5px; border-left-width:5px; border-color:#000000;}
+            .tg .tg-bot-right{border-bottom-width:5px; border-right-width:5px; border-color:#000000;}
+            .tg .tg-left{border-left-width:5px; border-color:#000000;}
+            .tg .tg-right{border-right-width:5px; border-color:#000000;}
+            /* div {
+                width:30px;
+                margin: auto;
+            } */
+            input{
+                width:10px;
+            }
+            #button{
+                width:auto;
+            }
+            </style>
+            <table class="tg">
+            <!-- <col span="3" style="border: 3px solid #000000;" /> -->
+            <tbody>
+              <tr>
+                <td class="tg-top-left"><input type="integer" name="box_1" id="box_1"> </td>
+                <td class="tg-top"><input type="integer" name="box_2" id="box_2"> </td>
+                <td class="tg-top-right"><input type="integer" name="box_3" id="box_3"> </td>
+                <td class="tg-top"><input type="integer" name="box_4" id="box_4"> </td>
+                <td class="tg-top"><input type="integer" name="box_5" id="box_5"> </td>
+                <td class="tg-top-right"><input type="integer" name="box_6" id="box_6"> </td>
+                <td class="tg-top"><input type="integer" name="box_7" id="box_7"> </td>
+                <td class="tg-top"><input type="integer" name="box_8" id="box_8"> </td>
+                <td class="tg-top-right"><input type="integer" name="box_9" id="box_9"> </td>
+              </tr>
+              <tr>
+                <td class="tg-left"><input type="integer" name="box_10" id="box_10"></td>
+                <td class="tg-73oq"><input type="integer" name="box_11" id="box_11"></td>
+                <td class="tg-right"><input type="integer" name="box_12" id="box_12"></td>
+                <td class="tg-0lax"><input type="integer" name="box_13" id="box_13"></td>
+                <td class="tg-0lax"><input type="integer" name="box_14" id="box_14"></td>
+                <td class="tg-right"><input type="integer" name="box_15" id="box_15"></td>
+                <td class="tg-0lax"><input type="integer" name="box_16" id="box_16"></td>
+                <td class="tg-0lax"><input type="integer" name="box_17" id="box_17"></td>
+                <td class="tg-right"><input type="integer" name="box_18" id="box_18"></td>
+              </tr>
+              <tr>
+                <td class="tg-bot-left"><input type="integer" name="box_19" id="box_19"></td>
+                <td class="tg-bot"><input type="integer" name="box_20" id="box_20"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_21" id="box_21"></td>
+                <td class="tg-bot"><input type="integer" name="box_22" id="box_22"></td>
+                <td class="tg-bot"><input type="integer" name="box_23" id="box_23"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_24" id="box_24"></td>
+                <td class="tg-bot"><input type="integer" name="box_25" id="box_25"></td>
+                <td class="tg-bot"><input type="integer" name="box_26" id="box_26"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_27" id="box_27"></td>
+              </tr>
+              <tr>
+                <td class="tg-left"><input type="integer" name="box_28" id="box_28"></td>
+                <td class="tg-0lax"><input type="integer" name="box_29" id="box_29"></td>
+                <td class="tg-right"><input type="integer" name="box_30" id="box_30"></td>
+                <td class="tg-0lax"><input type="integer" name="box_31" id="box_31"></td>
+                <td class="tg-0lax"><input type="integer" name="box_32" id="box_32"></td>
+                <td class="tg-right"><input type="integer" name="box_33" id="box_33"></td>
+                <td class="tg-0lax"><input type="integer" name="box_34" id="box_34"></td>
+                <td class="tg-0lax"><input type="integer" name="box_35" id="box_35"></td>
+                <td class="tg-right"><input type="integer" name="box_36" id="box_36"></td>
+              </tr>
+              <tr>
+                <td class="tg-left"><input type="integer" name="box_37" id="box_37"></td>
+                <td class="tg-0lax"><input type="integer" name="box_38" id="box_38"></td>
+                <td class="tg-right"><input type="integer" name="box_39" id="box_39"></td>
+                <td class="tg-0lax"><input type="integer" name="box_40" id="box_40"></td>
+                <td class="tg-0lax"><input type="integer" name="box_41" id="box_41"></td>
+                <td class="tg-right"><input type="integer" name="box_42" id="box_42"></td>
+                <td class="tg-0lax"><input type="integer" name="box_43" id="box_43"></td>
+                <td class="tg-0lax"><input type="integer" name="box_44" id="box_44"></td>
+                <td class="tg-right"><input type="integer" name="box_45" id="box_45"></td>
+              </tr>
+              <tr>
+                <td class="tg-bot-left"><input type="integer" name="box_46" id="box_46"></td>
+                <td class="tg-bot"><input type="integer" name="box_47" id="box_47"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_48" id="box_48"></td>
+                <td class="tg-bot"><input type="integer" name="box_49" id="box_49"></td>
+                <td class="tg-bot"><input type="integer" name="box_50" id="box_50"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_51" id="box_51"></td>
+                <td class="tg-bot"><input type="integer" name="box_52" id="box_52"></td>
+                <td class="tg-bot"><input type="integer" name="box_53" id="box_53"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_54" id="box_54"></td>
+              </tr>
+              <tr>
+                <td class="tg-left"><input type="integer" name="box_55" id="box_55"></td>
+                <td class="tg-0lax"><input type="integer" name="box_56" id="box_56"></td>
+                <td class="tg-right"><input type="integer" name="box_57" id="box_57"></td>
+                <td class="tg-0lax"><input type="integer" name="box_58" id="box_58"></td>
+                <td class="tg-0lax"><input type="integer" name="box_59" id="box_59"></td>
+                <td class="tg-right"><input type="integer" name="box_60" id="box_60"></td>
+                <td class="tg-0lax"><input type="integer" name="box_61" id="box_61"></td>
+                <td class="tg-0lax"><input type="integer" name="box_62" id="box_62"></td>
+                <td class="tg-right"><input type="integer" name="box_63" id="box_63"></td>
+              </tr>
+              <tr>
+                <td class="tg-left"><input type="integer" name="box_64" id="box_64"></td>
+                <td class="tg-0lax"><input type="integer" name="box_65" id="box_65"></td>
+                <td class="tg-right"><input type="integer" name="box_66" id="box_66"></td>
+                <td class="tg-0lax"><input type="integer" name="box_67" id="box_67"></td>
+                <td class="tg-0lax"><input type="integer" name="box_68" id="box_68"></td>
+                <td class="tg-right"><input type="integer" name="box_69" id="box_69"></td>
+                <td class="tg-0lax"><input type="integer" name="box_70" id="box_70"></td>
+                <td class="tg-0lax"><input type="integer" name="box_71" id="box_71"></td>
+                <td class="tg-right"><input type="integer" name="box_72" id="box_72"></td>
+              </tr>
+              <tr>
+                <td class="tg-bot-left"><input type="integer" name="box_73" id="box_73"></td>
+                <td class="tg-bot"><input type="integer" name="box_74" id="box_74"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_75" id="box_75"></td>
+                <td class="tg-bot"><input type="integer" name="box_76" id="box_76"></td>
+                <td class="tg-bot"><input type="integer" name="box_77" id="box_77"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_78" id="box_78"></td>
+                <td class="tg-bot"><input type="integer" name="box_79" id="box_79"></td>
+                <td class="tg-bot"><input type="integer" name="box_80" id="box_80"></td>
+                <td class="tg-bot-right"><input type="integer" name="box_81" id="box_81"></td>
+              </tr>
+            </tbody>
+            </table>
+            <br>
+            <div ><input id="button" class="center-block" type="button" onclick="load_function()" value="Solve">
+            </div>
+    </form>
+</div>
+<br>
+<div id="load_gif" style="visibility: collapse;">
+  Solving 
+  <br>
+  <img src="{{ url_for('static',filename='images/Spinner-1s-100px.gif') }}" alt="loading_gif">
+</div>
+<script>
+  function load_function() {
+  var x = document.getElementById("load_gif");
+  if (x.style.visibility == "collapse") {
+    x.style.visibility = "visible";
+  } 
+  document.getElementById("board").submit()
+}
+</script>
+{% endblock %}

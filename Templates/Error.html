@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<h1>Sudoku Solver</h1>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>
+        Error
+    </h1>
+    <p>
+        There was an error in the sudoku input. Please make sure that the problem is valid.
+    </p>
+    <button><a href="{{url_for('index')}}">Return</a></button>
+</div>
+{% endblock %}

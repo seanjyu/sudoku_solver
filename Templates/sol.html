@@ -1,0 +1,147 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<h1>Sudoku Solver</h1>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+        <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0px;margin:0px auto;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:16px;
+              overflow:hidden;padding:13px 13px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg .tg-73oq{border-color:#000000;text-align:left;vertical-align:top}
+            .tg .tg-0lax{text-align:left;vertical-align:top}
+            .tg .tg-top{border-top-width:5px; border-color:#000000;}
+            .tg .tg-top-left{border-top-width:5px; border-left-width:5px; border-color:#000000;}
+            .tg .tg-top-right{border-top-width:5px; border-right-width:5px; border-color:#000000;}
+            .tg .tg-bot{border-bottom-width:5px; border-color:#000000;}
+            .tg .tg-bot-left{border-bottom-width:5px; border-left-width:5px; border-color:#000000;}
+            .tg .tg-bot-right{border-bottom-width:5px; border-right-width:5px; border-color:#000000;}
+            .tg .tg-left{border-left-width:5px; border-color:#000000;}
+            .tg .tg-right{border-right-width:5px; border-color:#000000;}
+            /* div {
+                width:30px;
+                margin: auto;
+            } */
+            input{
+                width:10px;
+            }
+            .button{
+                width:auto;
+                text-align:center;
+                display: block;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            </style>
+            <table class="tg">
+            <!-- <col span="3" style="border: 3px solid #000000;" /> -->
+            <tbody>
+              <tr>
+                <td class="tg-top-left">{{sol['A1']}} </td>
+                <td class="tg-top">{{sol['A2']}}</td>
+                <td class="tg-top-right">{{sol['A3']}}</td>
+                <td class="tg-top">{{sol['A4']}} </td>
+                <td class="tg-top">{{sol['A5']}}</td>
+                <td class="tg-top-right">{{sol['A6']}} </td>
+                <td class="tg-top">{{sol['A7']}}</td>
+                <td class="tg-top">{{sol['A8']}} </td>
+                <td class="tg-top-right">{{sol['A9']}} </td>
+              </tr>
+              <tr>
+                <td class="tg-left">{{sol['B1']}}</td>
+                <td class="tg-73oq">{{sol['B2']}}</td>
+                <td class="tg-right">{{sol['B3']}}</td>
+                <td class="tg-0lax">{{sol['B4']}}</td>
+                <td class="tg-0lax">{{sol['B5']}}</td>
+                <td class="tg-right">{{sol['B6']}}</td>
+                <td class="tg-0lax">{{sol['B7']}}</td>
+                <td class="tg-0lax">{{sol['B8']}}</td>
+                <td class="tg-right">{{sol['B9']}}</td>
+              </tr>
+              <tr>
+                <td class="tg-bot-left">{{sol['C1']}}</td>
+                <td class="tg-bot">{{sol['C2']}}</td>
+                <td class="tg-bot-right">{{sol['C3']}}</td>
+                <td class="tg-bot">{{sol['C4']}}</td>
+                <td class="tg-bot">{{sol['C5']}}</td>
+                <td class="tg-bot-right">{{sol['C6']}}</td>
+                <td class="tg-bot">{{sol['C7']}}</td>
+                <td class="tg-bot">{{sol['C8']}}</td>
+                <td class="tg-bot-right">{{sol['C9']}}</td>
+              </tr>
+              <tr>
+                <td class="tg-left">{{sol['D1']}}</td>
+                <td class="tg-73oq">{{sol['D2']}}</td>
+                <td class="tg-right">{{sol['D3']}}</td>
+                <td class="tg-0lax">{{sol['D4']}}</td>
+                <td class="tg-0lax">{{sol['D5']}}</td>
+                <td class="tg-right">{{sol['D6']}}</td>
+                <td class="tg-0lax">{{sol['D7']}}</td>
+                <td class="tg-0lax">{{sol['D8']}}</td>
+                <td class="tg-right">{{sol['D9']}}</td>
+              </tr>
+              <tr>
+                <td class="tg-left">{{sol['E1']}}</td>
+                <td class="tg-73oq">{{sol['E2']}}</td>
+                <td class="tg-right">{{sol['E3']}}</td>
+                <td class="tg-0lax">{{sol['E4']}}</td>
+                <td class="tg-0lax">{{sol['E5']}}</td>
+                <td class="tg-right">{{sol['E6']}}</td>
+                <td class="tg-0lax">{{sol['E7']}}</td>
+                <td class="tg-0lax">{{sol['E8']}}</td>
+                <td class="tg-right">{{sol['E9']}}</td>
+              </tr>
+              <tr>
+                <td class="tg-bot-left">{{sol['F1']}}</td>
+                <td class="tg-bot">{{sol['F2']}}</td>
+                <td class="tg-bot-right">{{sol['F3']}}</td>
+                <td class="tg-bot">{{sol['F4']}}</td>
+                <td class="tg-bot">{{sol['F5']}}</td>
+                <td class="tg-bot-right">{{sol['F6']}}</td>
+                <td class="tg-bot">{{sol['F7']}}</td>
+                <td class="tg-bot">{{sol['F8']}}</td>
+                <td class="tg-bot-right">{{sol['F9']}}</td>
+              </tr>
+              <tr>
+                <td class="tg-left">{{sol['G1']}}</td>
+                <td class="tg-73oq">{{sol['G2']}}</td>
+                <td class="tg-right">{{sol['G3']}}</td>
+                <td class="tg-0lax">{{sol['G4']}}</td>
+                <td class="tg-0lax">{{sol['G5']}}</td>
+                <td class="tg-right">{{sol['G6']}}</td>
+                <td class="tg-0lax">{{sol['G7']}}</td>
+                <td class="tg-0lax">{{sol['G8']}}</td>
+                <td class="tg-right">{{sol['G9']}}</td>
+              </tr>
+              <tr>
+                <td class="tg-left">{{sol['H1']}}</td>
+                <td class="tg-73oq">{{sol['H2']}}</td>
+                <td class="tg-right">{{sol['H3']}}</td>
+                <td class="tg-0lax">{{sol['H4']}}</td>
+                <td class="tg-0lax">{{sol['H5']}}</td>
+                <td class="tg-right">{{sol['H6']}}</td>
+                <td class="tg-0lax">{{sol['H7']}}</td>
+                <td class="tg-0lax">{{sol['H8']}}</td>
+                <td class="tg-right">{{sol['H9']}}</td>
+              </tr>
+              <tr>
+                <td class="tg-bot-left">{{sol['I1']}}</td>
+                <td class="tg-bot">{{sol['I2']}}</td>
+                <td class="tg-bot-right">{{sol['I3']}}</td>
+                <td class="tg-bot">{{sol['I4']}}</td>
+                <td class="tg-bot">{{sol['I5']}}</td>
+                <td class="tg-bot-right">{{sol['I6']}}</td>
+                <td class="tg-bot">{{sol['I7']}}</td>
+                <td class="tg-bot">{{sol['I8']}}</td>
+                <td class="tg-bot-right">{{sol['I9']}}</td>
+              </tr>
+            </tbody>
+            </table>
+            <br>
+            <button><a href="{{url_for('index')}}">Return</a></button>
+</div>
+{% endblock %}

@@ -108,7 +108,6 @@ def backtracking(board):
     d=domains(board)
     finished_board = bt({},board,d)
     return finished_board
-    
 
 def bt(assignment, board,domains):
     """Takes a board and returns solved board."""
@@ -211,7 +210,7 @@ def solver(line):
     
     board = { ROW[r] + COL[c]: int(line[9*r+c])
                   for r in range(9) for c in range(9)}
-    print(board)
+
     if initial_check(board):
         sol=backtracking(board)
         return(sol)
@@ -219,6 +218,7 @@ def solver(line):
         return False
 #    return backtracking(board)
 def initial_check(board):
+    #Check Rows
     for i in ROW:
         row_val=[]
         for j in COL:
@@ -226,7 +226,7 @@ def initial_check(board):
         no_zero_row=list(filter(lambda a: a != 0, row_val))
         if len(no_zero_row)!=len(set(no_zero_row)):    
             return False
-
+    #Check Columns
     for i in COL:
         col_val=[]
         for j in ROW:
@@ -234,7 +234,7 @@ def initial_check(board):
         no_zero_col=list(filter(lambda a: a != 0, col_val))
         if len(no_zero_col)!=len(set(no_zero_col)):    
             return False
-
+    #Check Boxes in cols 1-3
     box1=[]
     box2=[]
     box3=[]
@@ -254,14 +254,13 @@ def initial_check(board):
         no_zero_box_3=list(filter(lambda a: a != 0, box3))
         if len(no_zero_box_3)!=len(set(no_zero_box_3)):
             return False
-
+    #Check Boxes in cols 3-6
     box1=[]
     box2=[]
     box3=[]
     for i in ROW[3:6]:   
         for j in COL[0:3]:
             box1.append(board[i+j])
-        print((box1))
         no_zero_box_1=list(filter(lambda a: a != 0, box1))
         if len(no_zero_box_1)!=len(set(no_zero_box_1)):
             return False
@@ -275,7 +274,7 @@ def initial_check(board):
         no_zero_box_3=list(filter(lambda a: a != 0, box3))
         if len(no_zero_box_3)!=len(set(no_zero_box_3)):
             return False
-    
+    #Check Boxes in cols 6-9 
     box1=[]
     box2=[]
     box3=[]

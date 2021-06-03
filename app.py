@@ -28,15 +28,15 @@ def index():
         print(s)
         print(len(s))
         if len(s)>81:
-            return render_template({{ url_for(filename='error.html') }})
+            return render_template('error.html')
         sol=solver(s)
         
         if sol==False:
-            return render_template({{ url_for(filename='error.html') }})
+            return render_template('error.html')
         else:
-            return render_template({{ url_for(filename='sol.html') }},sol=sol)
+            return render_template('sol.html',sol=sol)
     else:
-        return render_template({{ url_for(filename='index.html') }})
+        return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
